@@ -16,6 +16,11 @@ This repository includes:
 
 ![alt text](https://github.com/mikikg/picss/blob/master/doc/pic-soft-start.png)
 
+# Warning
+
+This circuit operates on the mains high voltage line, do not touch any part of this device!
+
+Please note that additional mains FUSE IS REQUIRED.
 
 # More info
 
