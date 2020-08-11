@@ -1,9 +1,9 @@
 # PIC Soft Start
 
-An 230VAC 2kVA Soft start circuit with PIC16F15313 microcontroler.
+An 230VAC 2kVA Soft start circuit with PIC16F15313 microcontroller.
 
 This repository include:
-* Mplab X project fot PIC firmware including source files and compiled HEX
+* Mplab X project for PIC firmware including source files and compiled HEX
 * KiCAD project files for schematic and PCB
 
 # Specification
