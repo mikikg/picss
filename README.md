@@ -2,6 +2,10 @@
 
 An 230VAC 2kVA Soft start circuit with PIC16F15313 microcontroler.
 
+This repository include:
+* Mplab X project fot PIC firmware including source files and compiled HEX
+* KiCAD project files for schematic and PCB
+
 # Specification
 
 * Input voltage: 230VAC
@@ -12,3 +16,7 @@ An 230VAC 2kVA Soft start circuit with PIC16F15313 microcontroler.
 
 ![alt text](https://github.com/mikikg/picss/blob/master/doc/pic-soft-start.png)
 
+
+# More info
+
+For more information visit project forum thread at https://forum.yu3ma.net/thread-1807-newpost.html
