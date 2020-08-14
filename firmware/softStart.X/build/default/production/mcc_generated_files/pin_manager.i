@@ -9899,7 +9899,7 @@ void PIN_MANAGER_Initialize(void)
 
 
 
-    LATA = 0x00;
+    LATA = 0x20;
 
 
 

@@ -836,8 +836,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :U _PIN_MANAGER_Initialize ]
 [f ]
 "60
-[; ;mcc_generated_files/pin_manager.c: 60:     LATA = 0x00;
-[e = _LATA -> -> 0 `i `uc ]
+[; ;mcc_generated_files/pin_manager.c: 60:     LATA = 0x20;
+[e = _LATA -> -> 32 `i `uc ]
 "65
 [; ;mcc_generated_files/pin_manager.c: 65:     TRISA = 0x07;
 [e = _TRISA -> -> 7 `i `uc ]

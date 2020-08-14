@@ -50,13 +50,13 @@ Version 4.0 HI-TECH Software Intermediate Code
 "129 ./mcc_generated_files/tmr0.h
 [; ;./mcc_generated_files/tmr0.h: 129: void TMR0_StartTimer(void);
 [v _TMR0_StartTimer `(v ~T0 @X0 0 ef ]
-"127 main.c
-[; ;main.c: 127:         zadat_slope_adc = low_pass_filter_2(ADC_GetConversion(pot_slope));
-[c E5887 0 1 59 60 61 62 63 .. ]
-[n E5887 . pot_slope pot_power channel_AVSS channel_Temp channel_DAC1 channel_FVR_BUF1 channel_FVR_BUF2  ]
+"129 main.c
+[; ;main.c: 129:         slope_increment = low_pass_filter_2(ADC_GetConversion(pot_slope));
+[c E5909 0 1 59 60 61 62 63 .. ]
+[n E5909 . pot_slope pot_power channel_AVSS channel_Temp channel_DAC1 channel_FVR_BUF1 channel_FVR_BUF2  ]
 "291 ./mcc_generated_files/adc.h
 [; ;./mcc_generated_files/adc.h: 291: adc_result_t ADC_GetConversion(adc_channel_t channel);
-[v _ADC_GetConversion `(us ~T0 @X0 0 ef1`E5887 ]
+[v _ADC_GetConversion `(us ~T0 @X0 0 ef1`E5909 ]
 "19701 /Applications/microchip/mplabx/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8/pic/include/proc/pic16f15313.h
 [; ;/Applications/microchip/mplabx/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8/pic/include/proc/pic16f15313.h: 19701: extern volatile __bit RA3 __attribute__((address(0x63)));
 [v _RA3 `Vb ~T0 @X0 0 e@99 ]
@@ -1027,216 +1027,221 @@ Version 4.0 HI-TECH Software Intermediate Code
 [e :UE 798 ]
 }
 [v $root$_main `(v ~T0 @X0 0 e ]
-"108
-[; ;main.c: 108: void main(void) {
+"113
+[; ;main.c: 113: void main(void) {
 [v _main `(v ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"110
-[; ;main.c: 110:     SYSTEM_Initialize();
+"115
+[; ;main.c: 115:     SYSTEM_Initialize();
 [e ( _SYSTEM_Initialize ..  ]
-"112
-[; ;main.c: 112:     (INTCONbits.GIE = 1);
-[e = . . _INTCONbits 0 3 -> -> 1 `i `uc ]
-"113
-[; ;main.c: 113:     (INTCONbits.PEIE = 1);
-[e = . . _INTCONbits 0 2 -> -> 1 `i `uc ]
-"114
-[; ;main.c: 114:     TMR0_StartTimer();
-[e ( _TMR0_StartTimer ..  ]
 "117
-[; ;main.c: 117:     int taster_time, slope_counter, tmp_zadato;
+[; ;main.c: 117:     (INTCONbits.GIE = 1);
+[e = . . _INTCONbits 0 3 -> -> 1 `i `uc ]
+"118
+[; ;main.c: 118:     (INTCONbits.PEIE = 1);
+[e = . . _INTCONbits 0 2 -> -> 1 `i `uc ]
+"119
+[; ;main.c: 119:     TMR0_StartTimer();
+[e ( _TMR0_StartTimer ..  ]
+"122
+[; ;main.c: 122:     int taster_time, slope_counter, tmp_zadato, slope_increment;
 [v _taster_time `i ~T0 @X0 1 a ]
 [v _slope_counter `i ~T0 @X0 1 a ]
 [v _tmp_zadato `i ~T0 @X0 1 a ]
-"118
-[; ;main.c: 118:     _Bool scr_out_enable;
-[v _scr_out_enable `a ~T0 @X0 1 a ]
-"119
-[; ;main.c: 119:     _Bool slope_up_active;
-[v _slope_up_active `a ~T0 @X0 1 a ]
-"120
-[; ;main.c: 120:     int slope_increment = 500;
 [v _slope_increment `i ~T0 @X0 1 a ]
-[e = _slope_increment -> 500 `i ]
-"121
-[; ;main.c: 121:     int inactive_angle = 2000;
-[v _inactive_angle `i ~T0 @X0 1 a ]
-[e = _inactive_angle -> 2000 `i ]
-"122
-[; ;main.c: 122:     int max_angle = 1000;
-[v _max_angle `i ~T0 @X0 1 a ]
-[e = _max_angle -> 1000 `i ]
-"124
-[; ;main.c: 124:     while (1)
+"123
+[; ;main.c: 123:     _Bool scr_out_enable = 0, slope_up_active;
+[v _scr_out_enable `a ~T0 @X0 1 a ]
+[e = _scr_out_enable -> -> 0 `i `a ]
+[v _slope_up_active `a ~T0 @X0 1 a ]
+"126
+[; ;main.c: 126:     while (1)
 [e :U 801 ]
-"125
-[; ;main.c: 125:     {
-{
 "127
-[; ;main.c: 127:         zadat_slope_adc = low_pass_filter_2(ADC_GetConversion(pot_slope));
-[e = _zadat_slope_adc ( _low_pass_filter_2 (1 -> ( _ADC_GetConversion (1 . `E5887 0 `ui ]
-"128
-[; ;main.c: 128:         tmp_zadato = max_angle - low_pass_filter_1(ADC_GetConversion(pot_power));
-[e = _tmp_zadato -> - -> _max_angle `ui ( _low_pass_filter_1 (1 -> ( _ADC_GetConversion (1 . `E5887 1 `ui `i ]
+[; ;main.c: 127:     {
+{
 "129
-[; ;main.c: 129:         if (tmp_zadato < 0) tmp_zadato = 0;
-[e $ ! < _tmp_zadato -> 0 `i 803  ]
-[e = _tmp_zadato -> 0 `i ]
+[; ;main.c: 129:         slope_increment = low_pass_filter_2(ADC_GetConversion(pot_slope));
+[e = _slope_increment -> ( _low_pass_filter_2 (1 -> ( _ADC_GetConversion (1 . `E5909 0 `ui `i ]
+"130
+[; ;main.c: 130:         tmp_zadato = 1000 - low_pass_filter_1(ADC_GetConversion(pot_power));
+[e = _tmp_zadato -> - -> -> 1000 `i `ui ( _low_pass_filter_1 (1 -> ( _ADC_GetConversion (1 . `E5909 1 `ui `i ]
+"131
+[; ;main.c: 131:         if (tmp_zadato < 50) tmp_zadato = 50;
+[e $ ! < _tmp_zadato -> 50 `i 803  ]
+[e = _tmp_zadato -> 50 `i ]
 [e :U 803 ]
-"132
-[; ;main.c: 132:         if (RA3 == 0) {
+"134
+[; ;main.c: 134:         if (RA3 == 0) {
 [e $ ! == -> _RA3 `i -> 0 `i 804  ]
 {
-"133
-[; ;main.c: 133:             if (taster_time ++ == 200) {
+"135
+[; ;main.c: 135:             if (taster_time ++ == 200) {
 [e $ ! == ++ _taster_time -> 1 `i -> 200 `i 805  ]
 {
-"135
-[; ;main.c: 135:                 scr_out_enable =! scr_out_enable;
+"137
+[; ;main.c: 137:                 scr_out_enable =! scr_out_enable;
 [e = _scr_out_enable -> -> ! != -> _scr_out_enable `i -> 0 `i `i `a ]
-"136
-[; ;main.c: 136:                 if (scr_out_enable == 1) {
+"138
+[; ;main.c: 138:                 if (scr_out_enable == 1) {
 [e $ ! == -> _scr_out_enable `i -> 1 `i 806  ]
 {
-"137
-[; ;main.c: 137:                     slope_up_active = 1;
-[e = _slope_up_active -> -> 1 `i `a ]
-"138
-[; ;main.c: 138:                     slope_counter = max_angle;
-[e = _slope_counter _max_angle ]
 "139
-[; ;main.c: 139:                 }
+[; ;main.c: 139:                     slope_up_active = 1;
+[e = _slope_up_active -> -> 1 `i `a ]
+"140
+[; ;main.c: 140:                     slope_counter = 1000;
+[e = _slope_counter -> 1000 `i ]
+"141
+[; ;main.c: 141:                 }
 }
 [e :U 806 ]
-"140
-[; ;main.c: 140:             }
+"142
+[; ;main.c: 142:             }
 }
 [e :U 805 ]
-"141
-[; ;main.c: 141:         } else taster_time = 0;
+"143
+[; ;main.c: 143:         } else taster_time = 0;
 }
 [e $U 807  ]
 [e :U 804 ]
 [e = _taster_time -> 0 `i ]
 [e :U 807 ]
-"144
-[; ;main.c: 144:         if (slope_up_active == 1) {
+"146
+[; ;main.c: 146:         if (slope_up_active == 1) {
 [e $ ! == -> _slope_up_active `i -> 1 `i 808  ]
 {
-"145
-[; ;main.c: 145:             if (brojac2 >= slope_increment) {
+"147
+[; ;main.c: 147:             if (brojac2 >= slope_increment) {
 [e $ ! >= _brojac2 -> _slope_increment `ui 809  ]
 {
-"146
-[; ;main.c: 146:                 slope_counter --;
+"148
+[; ;main.c: 148:                 slope_counter --;
 [e -- _slope_counter -> 1 `i ]
-"147
-[; ;main.c: 147:                 if (slope_counter <= 0 || slope_counter < tmp_zadato) {
+"149
+[; ;main.c: 149:                 if (slope_counter <= 0 || slope_counter < tmp_zadato) {
 [e $ ! || <= _slope_counter -> 0 `i < _slope_counter _tmp_zadato 810  ]
 {
-"149
-[; ;main.c: 149:                     slope_up_active = 0;
+"151
+[; ;main.c: 151:                     slope_up_active = 0;
 [e = _slope_up_active -> -> 0 `i `a ]
-"150
-[; ;main.c: 150:                 } else {
+"152
+[; ;main.c: 152:                 } else {
 }
 [e $U 811  ]
 [e :U 810 ]
 {
-"152
-[; ;main.c: 152:                 }
+"154
+[; ;main.c: 154:                 }
 }
 [e :U 811 ]
-"153
-[; ;main.c: 153:                 brojac2 = 0;
+"155
+[; ;main.c: 155:                 brojac2 = 0;
 [e = _brojac2 -> -> 0 `i `ui ]
-"154
-[; ;main.c: 154:             }
+"156
+[; ;main.c: 156:             }
 }
 [e :U 809 ]
-"155
-[; ;main.c: 155:         }
+"157
+[; ;main.c: 157:         }
 }
 [e :U 808 ]
-"158
-[; ;main.c: 158:         if (scr_out_enable) {
-[e $ ! != -> _scr_out_enable `i -> 0 `i 812  ]
-{
 "159
-[; ;main.c: 159:             if (tmp_zadato > 990) {
-[e $ ! > _tmp_zadato -> 990 `i 813  ]
+[; ;main.c: 159:         if (brojac1 > 1500) {
+[e $ ! > _brojac1 -> -> 1500 `i `ui 812  ]
 {
-"160
-[; ;main.c: 160:                 zadat_ugao_adc = inactive_angle;
-[e = _zadat_ugao_adc -> _inactive_angle `ui ]
 "161
-[; ;main.c: 161:             } else {
+[; ;main.c: 161:             scr_out_enable = 0;
+[e = _scr_out_enable -> -> 0 `i `a ]
+"162
+[; ;main.c: 162:             slope_up_active = 0;
+[e = _slope_up_active -> -> 0 `i `a ]
+"163
+[; ;main.c: 163:             brojac1 = 0;
+[e = _brojac1 -> -> 0 `i `ui ]
+"164
+[; ;main.c: 164:         }
 }
-[e $U 814  ]
+[e :U 812 ]
+"167
+[; ;main.c: 167:         if (scr_out_enable) {
+[e $ ! != -> _scr_out_enable `i -> 0 `i 813  ]
+{
+"168
+[; ;main.c: 168:             if (tmp_zadato > 990) {
+[e $ ! > _tmp_zadato -> 990 `i 814  ]
+{
+"169
+[; ;main.c: 169:                 zadat_ugao_adc = 2000;
+[e = _zadat_ugao_adc -> -> 2000 `i `ui ]
+"170
+[; ;main.c: 170:             } else {
+}
+[e $U 815  ]
+[e :U 814 ]
+{
+"171
+[; ;main.c: 171:                 if (slope_up_active) {
+[e $ ! != -> _slope_up_active `i -> 0 `i 816  ]
+{
+"172
+[; ;main.c: 172:                     zadat_ugao_adc = slope_counter;
+[e = _zadat_ugao_adc -> _slope_counter `ui ]
+"173
+[; ;main.c: 173:                 } else {
+}
+[e $U 817  ]
+[e :U 816 ]
+{
+"174
+[; ;main.c: 174:                     zadat_ugao_adc = tmp_zadato;
+[e = _zadat_ugao_adc -> _tmp_zadato `ui ]
+"175
+[; ;main.c: 175:                 }
+}
+[e :U 817 ]
+"176
+[; ;main.c: 176:             }
+}
+[e :U 815 ]
+"178
+[; ;main.c: 178:             if (zadat_ugao_adc < 60) RA5 = 0;
+[e $ ! < _zadat_ugao_adc -> -> 60 `i `ui 818  ]
+[e = _RA5 -> -> 0 `i `b ]
+[e :U 818 ]
+"179
+[; ;main.c: 179:             if (zadat_ugao_adc > 80) RA5 = 1;
+[e $ ! > _zadat_ugao_adc -> -> 80 `i `ui 819  ]
+[e = _RA5 -> -> 1 `i `b ]
+[e :U 819 ]
+"180
+[; ;main.c: 180:         } else {
+}
+[e $U 820  ]
 [e :U 813 ]
 {
-"162
-[; ;main.c: 162:                 if (slope_up_active) {
-[e $ ! != -> _slope_up_active `i -> 0 `i 815  ]
-{
-"163
-[; ;main.c: 163:                     zadat_ugao_adc = slope_counter;
-[e = _zadat_ugao_adc -> _slope_counter `ui ]
-"164
-[; ;main.c: 164:                 } else {
-}
-[e $U 816  ]
-[e :U 815 ]
-{
-"165
-[; ;main.c: 165:                     zadat_ugao_adc = tmp_zadato;
-[e = _zadat_ugao_adc -> _tmp_zadato `ui ]
-"166
-[; ;main.c: 166:                 }
-}
-[e :U 816 ]
-"167
-[; ;main.c: 167:             }
-}
-[e :U 814 ]
-"169
-[; ;main.c: 169:             if (zadat_ugao_adc < 100) RA5 = 0;
-[e $ ! < _zadat_ugao_adc -> -> 100 `i `ui 817  ]
-[e = _RA5 -> -> 0 `i `b ]
-[e :U 817 ]
-"170
-[; ;main.c: 170:             if (zadat_ugao_adc > 150) RA5 = 1;
-[e $ ! > _zadat_ugao_adc -> -> 150 `i `ui 818  ]
-[e = _RA5 -> -> 1 `i `b ]
-[e :U 818 ]
-"171
-[; ;main.c: 171:         } else {
-}
-[e $U 819  ]
-[e :U 812 ]
-{
-"173
-[; ;main.c: 173:             slope_counter = 0;
+"182
+[; ;main.c: 182:             slope_counter = 0;
 [e = _slope_counter -> 0 `i ]
-"174
-[; ;main.c: 174:             zadat_ugao_adc = inactive_angle;
-[e = _zadat_ugao_adc -> _inactive_angle `ui ]
-"175
-[; ;main.c: 175:             RA5 = 1;
+"183
+[; ;main.c: 183:             zadat_ugao_adc = 2000;
+[e = _zadat_ugao_adc -> -> 2000 `i `ui ]
+"184
+[; ;main.c: 184:             RA5 = 1;
 [e = _RA5 -> -> 1 `i `b ]
-"176
-[; ;main.c: 176:         }
+"185
+[; ;main.c: 185:         }
 }
-[e :U 819 ]
-"178
-[; ;main.c: 178:     }
+[e :U 820 ]
+"187
+[; ;main.c: 187:     }
 }
 [e :U 800 ]
 [e $U 801  ]
 [e :U 802 ]
-"179
-[; ;main.c: 179: }
+"188
+[; ;main.c: 188: }
 [e :UE 799 ]
 }

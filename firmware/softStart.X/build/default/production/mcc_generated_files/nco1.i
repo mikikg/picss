@@ -10002,6 +10002,6 @@ void NCO1_Initialize (void)
     NCO1INCL = 0x8F;
 
 
-    NCO1CONbits.N1EN = 1;
+
 
 }

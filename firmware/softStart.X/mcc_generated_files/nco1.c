@@ -76,7 +76,7 @@ void NCO1_Initialize (void)
     NCO1INCL = 0x8F;
 
     // Enable the NCO module
-    NCO1CONbits.N1EN = 1;
+    //NCO1CONbits.N1EN = 1;
    
 }
 

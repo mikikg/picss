@@ -10022,6 +10022,39 @@ void NCO1_Initialize(void);
 _Bool NCO1_GetOutputStatus(void);
 # 56 "./mcc_generated_files/mcc.h" 2
 
+# 1 "./mcc_generated_files/tmr0.h" 1
+# 100 "./mcc_generated_files/tmr0.h"
+void TMR0_Initialize(void);
+# 129 "./mcc_generated_files/tmr0.h"
+void TMR0_StartTimer(void);
+# 161 "./mcc_generated_files/tmr0.h"
+void TMR0_StopTimer(void);
+# 196 "./mcc_generated_files/tmr0.h"
+uint8_t TMR0_ReadTimer(void);
+# 235 "./mcc_generated_files/tmr0.h"
+void TMR0_WriteTimer(uint8_t timerVal);
+# 272 "./mcc_generated_files/tmr0.h"
+void TMR0_Reload(uint8_t periodVal);
+# 291 "./mcc_generated_files/tmr0.h"
+void TMR0_ISR(void);
+# 310 "./mcc_generated_files/tmr0.h"
+ void TMR0_SetInterruptHandler(void (* InterruptHandler)(void));
+# 328 "./mcc_generated_files/tmr0.h"
+extern void (*TMR0_InterruptHandler)(void);
+# 346 "./mcc_generated_files/tmr0.h"
+void TMR0_DefaultInterruptHandler(void);
+
+
+unsigned int brojac1;
+unsigned int brojac2;
+# 359 "./mcc_generated_files/tmr0.h"
+unsigned int zadat_ugao_adc;
+unsigned int zadat_ugao;
+
+unsigned int zadat_slope_adc;
+unsigned int zadat_slope;
+# 57 "./mcc_generated_files/mcc.h" 2
+
 # 1 "./mcc_generated_files/adc.h" 1
 # 72 "./mcc_generated_files/adc.h"
 typedef uint16_t adc_result_t;
@@ -10059,39 +10092,6 @@ adc_result_t ADC_GetConversionResult(void);
 adc_result_t ADC_GetConversion(adc_channel_t channel);
 # 319 "./mcc_generated_files/adc.h"
 void ADC_TemperatureAcquisitionDelay(void);
-# 57 "./mcc_generated_files/mcc.h" 2
-
-# 1 "./mcc_generated_files/tmr0.h" 1
-# 100 "./mcc_generated_files/tmr0.h"
-void TMR0_Initialize(void);
-# 129 "./mcc_generated_files/tmr0.h"
-void TMR0_StartTimer(void);
-# 161 "./mcc_generated_files/tmr0.h"
-void TMR0_StopTimer(void);
-# 196 "./mcc_generated_files/tmr0.h"
-uint8_t TMR0_ReadTimer(void);
-# 235 "./mcc_generated_files/tmr0.h"
-void TMR0_WriteTimer(uint8_t timerVal);
-# 272 "./mcc_generated_files/tmr0.h"
-void TMR0_Reload(uint8_t periodVal);
-# 291 "./mcc_generated_files/tmr0.h"
-void TMR0_ISR(void);
-# 310 "./mcc_generated_files/tmr0.h"
- void TMR0_SetInterruptHandler(void (* InterruptHandler)(void));
-# 328 "./mcc_generated_files/tmr0.h"
-extern void (*TMR0_InterruptHandler)(void);
-# 346 "./mcc_generated_files/tmr0.h"
-void TMR0_DefaultInterruptHandler(void);
-
-
-unsigned int brojac1;
-unsigned int brojac2;
-# 359 "./mcc_generated_files/tmr0.h"
-unsigned int zadat_ugao_adc;
-unsigned int zadat_ugao;
-
-unsigned int zadat_slope_adc;
-unsigned int zadat_slope;
 # 58 "./mcc_generated_files/mcc.h" 2
 
 # 1 "./mcc_generated_files/zcd.h" 1
@@ -10170,10 +10170,7 @@ __attribute__((inline)) unsigned int low_pass_filter_2(unsigned int x1) {
  i1 = (i1==(32 -1) ? 0 : i1+1);
  return total1/32;
 }
-
-
-
-
+# 113 "main.c"
 void main(void) {
 
     SYSTEM_Initialize();
@@ -10183,19 +10180,16 @@ void main(void) {
     TMR0_StartTimer();
 
 
-    int taster_time, slope_counter, tmp_zadato;
-    _Bool scr_out_enable;
-    _Bool slope_up_active;
-    int slope_increment = 500;
-    int inactive_angle = 2000;
-    int max_angle = 1000;
+    int taster_time, slope_counter, tmp_zadato, slope_increment;
+    _Bool scr_out_enable = 0, slope_up_active;
+
 
     while (1)
     {
 
-        zadat_slope_adc = low_pass_filter_2(ADC_GetConversion(pot_slope));
-        tmp_zadato = max_angle - low_pass_filter_1(ADC_GetConversion(pot_power));
-        if (tmp_zadato < 0) tmp_zadato = 0;
+        slope_increment = low_pass_filter_2(ADC_GetConversion(pot_slope));
+        tmp_zadato = 1000 - low_pass_filter_1(ADC_GetConversion(pot_power));
+        if (tmp_zadato < 50) tmp_zadato = 50;
 
 
         if (RA3 == 0) {
@@ -10204,7 +10198,7 @@ void main(void) {
                 scr_out_enable =! scr_out_enable;
                 if (scr_out_enable == 1) {
                     slope_up_active = 1;
-                    slope_counter = max_angle;
+                    slope_counter = 1000;
                 }
             }
         } else taster_time = 0;
@@ -10223,10 +10217,17 @@ void main(void) {
             }
         }
 
+        if (brojac1 > 1500) {
+
+            scr_out_enable = 0;
+            slope_up_active = 0;
+            brojac1 = 0;
+        }
+
 
         if (scr_out_enable) {
             if (tmp_zadato > 990) {
-                zadat_ugao_adc = inactive_angle;
+                zadat_ugao_adc = 2000;
             } else {
                 if (slope_up_active) {
                     zadat_ugao_adc = slope_counter;
@@ -10235,12 +10236,12 @@ void main(void) {
                 }
             }
 
-            if (zadat_ugao_adc < 100) RA5 = 0;
-            if (zadat_ugao_adc > 150) RA5 = 1;
+            if (zadat_ugao_adc < 60) RA5 = 0;
+            if (zadat_ugao_adc > 80) RA5 = 1;
         } else {
 
             slope_counter = 0;
-            zadat_ugao_adc = inactive_angle;
+            zadat_ugao_adc = 2000;
             RA5 = 1;
         }
 

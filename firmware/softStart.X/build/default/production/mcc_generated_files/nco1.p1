@@ -23,17 +23,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 "6033
 [; ;/Applications/microchip/mplabx/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8/pic/include/proc/pic16f15313.h: 6033: extern volatile unsigned char NCO1INCL __attribute__((address(0x58F)));
 [v _NCO1INCL `Vuc ~T0 @X0 0 e@1423 ]
-"6225
-[; ;/Applications/microchip/mplabx/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8/pic/include/proc/pic16f15313.h: 6225:     struct {
-[s S309 :1 `uc 1 :3 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S309 . N1PFM . N1POL N1OUT . N1EN ]
-"6224
-[; ;/Applications/microchip/mplabx/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8/pic/include/proc/pic16f15313.h: 6224: typedef union {
-[u S308 `S309 1 ]
-[n S308 . . ]
-"6234
-[; ;/Applications/microchip/mplabx/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8/pic/include/proc/pic16f15313.h: 6234: extern volatile NCO1CONbits_t NCO1CONbits __attribute__((address(0x592)));
-[v _NCO1CONbits `VS308 ~T0 @X0 0 e@1426 ]
 "110 /Applications/microchip/mplabx/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8/pic/include/proc/pic16f15313.h
 [; ;/Applications/microchip/mplabx/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8/pic/include/proc/pic16f15313.h: 110: __asm("INDF0 equ 00h");
 [; <" INDF0 equ 00h ;# ">
@@ -870,9 +859,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 "76
 [; ;mcc_generated_files/nco1.c: 76:     NCO1INCL = 0x8F;
 [e = _NCO1INCL -> -> 143 `i `uc ]
-"79
-[; ;mcc_generated_files/nco1.c: 79:     NCO1CONbits.N1EN = 1;
-[e = . . _NCO1CONbits 0 5 -> -> 1 `i `uc ]
 "81
 [; ;mcc_generated_files/nco1.c: 81: }
 [e :UE 791 ]

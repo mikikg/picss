@@ -105,6 +105,11 @@ inline unsigned int low_pass_filter_2(unsigned int x1) {
 /*
                          Main application
  */
+
+#define inactive_angle 2000 // za brojac kada je neaktivan
+#define max_angle 1000 //vreme potrebno za 1 poluperiodu 1000*10us=10ms
+#define min_angle 50 //za podesavanje
+
 void main(void) {
     // initialize the device
     SYSTEM_Initialize();
@@ -113,20 +118,17 @@ void main(void) {
     INTERRUPT_PeripheralInterruptEnable();
     TMR0_StartTimer();
     
-    //imamo oko brojac1=1000 za jednu poluperiodu na 50Hz
-    int taster_time, slope_counter, tmp_zadato;
-    bool scr_out_enable;
-    bool slope_up_active;
-    int slope_increment = 500; // 500=5sec slope DEBUG, ovo ce biti ADC-slope
-    int inactive_angle = 2000; // za brojac kada je neaktivan
-    int max_angle = 1000; //vreme potrebno za 1 poluperiodu 1000*10us=10ms
+    //promenljive
+    int taster_time, slope_counter, tmp_zadato, slope_increment;
+    bool scr_out_enable = false, slope_up_active;
+
     
     while (1)
     {
         // ADC
-        zadat_slope_adc = low_pass_filter_2(ADC_GetConversion(pot_slope));
+        slope_increment = low_pass_filter_2(ADC_GetConversion(pot_slope));
         tmp_zadato = max_angle - low_pass_filter_1(ADC_GetConversion(pot_power));
-        if (tmp_zadato < 0) tmp_zadato = 0;
+        if (tmp_zadato < min_angle) tmp_zadato = min_angle;
         
         // Taster za start/stop slope
         if (RA3 == 0) { 
@@ -154,6 +156,13 @@ void main(void) {
             }
         }
         
+        if (brojac1 > 1500) { 
+            //ako odbrojao vise od 15ms bez ZCD, nema AC, gasi
+            scr_out_enable = false;
+            slope_up_active = false;
+            brojac1 = 0;
+        } 
+        
         // Out
         if (scr_out_enable) {
             if (tmp_zadato > 990) { //kada je minimum tj off
@@ -166,8 +175,8 @@ void main(void) {
                 }
             }
             //za relay kada je pri max snazi
-            if (zadat_ugao_adc < 100) RLY_OUT = 0;
-            if (zadat_ugao_adc > 150) RLY_OUT = 1;
+            if (zadat_ugao_adc < 60) RLY_OUT = 0;
+            if (zadat_ugao_adc > 80) RLY_OUT = 1;
         } else {
             //ugaseno
             slope_counter = 0;
