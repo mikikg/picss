@@ -52,11 +52,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _TMR0_StartTimer `(v ~T0 @X0 0 ef ]
 "129 main.c
 [; ;main.c: 129:         slope_increment = low_pass_filter_2(ADC_GetConversion(pot_slope));
-[c E5909 0 1 59 60 61 62 63 .. ]
-[n E5909 . pot_slope pot_power channel_AVSS channel_Temp channel_DAC1 channel_FVR_BUF1 channel_FVR_BUF2  ]
+[c E5910 0 1 59 60 61 62 63 .. ]
+[n E5910 . pot_slope pot_power channel_AVSS channel_Temp channel_DAC1 channel_FVR_BUF1 channel_FVR_BUF2  ]
 "291 ./mcc_generated_files/adc.h
 [; ;./mcc_generated_files/adc.h: 291: adc_result_t ADC_GetConversion(adc_channel_t channel);
-[v _ADC_GetConversion `(us ~T0 @X0 0 ef1`E5909 ]
+[v _ADC_GetConversion `(us ~T0 @X0 0 ef1`E5910 ]
 "19701 /Applications/microchip/mplabx/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8/pic/include/proc/pic16f15313.h
 [; ;/Applications/microchip/mplabx/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8/pic/include/proc/pic16f15313.h: 19701: extern volatile __bit RA3 __attribute__((address(0x63)));
 [v _RA3 `Vb ~T0 @X0 0 e@99 ]
@@ -885,6 +885,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 "363
 [; ;./mcc_generated_files/tmr0.h: 363: unsigned int zadat_slope;
 [v _zadat_slope `ui ~T0 @X0 1 e ]
+"365
+[; ;./mcc_generated_files/tmr0.h: 365: _Bool scr_out_enable = 0;
+[v _scr_out_enable `a ~T0 @X0 1 e ]
+[i _scr_out_enable
+-> -> 0 `i `a
+]
 "46 main.c
 [; ;main.c: 46: void TMR0_ISR(void) {
 [v _TMR0_ISR `(v ~T0 @X0 1 ef ]
@@ -901,8 +907,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 52:     brojac2++;
 [e ++ _brojac2 -> -> 1 `i `ui ]
 "56
-[; ;main.c: 56:     if ((brojac1 >= zadat_ugao) && (brojac1 <= (zadat_ugao+100))) {
-[e $ ! && >= _brojac1 _zadat_ugao <= _brojac1 + _zadat_ugao -> -> 100 `i `ui 793  ]
+[; ;main.c: 56:     if ((brojac1 >= zadat_ugao) && (brojac1 <= (zadat_ugao+100)) && scr_out_enable ) {
+[e $ ! && && >= _brojac1 _zadat_ugao <= _brojac1 + _zadat_ugao -> -> 100 `i `ui != -> _scr_out_enable `i -> 0 `i 793  ]
 {
 "57
 [; ;main.c: 57:         NCO1CONbits.N1EN = 1;
@@ -954,73 +960,73 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 79: }
 [e :UE 795 ]
 }
-[v F5936 `(ui ~T0 @X0 1 tf1`ui ]
+[v F5937 `(ui ~T0 @X0 1 tf1`ui ]
 "83
 [; ;main.c: 83: __attribute__((inline)) unsigned int low_pass_filter_1(unsigned int x) {
-[v _low_pass_filter_1 `TF5936 ~T0 @X0 1 e ]
+[v _low_pass_filter_1 `TF5937 ~T0 @X0 1 e ]
 {
 [e :U _low_pass_filter_1 ]
 [v _x `ui ~T0 @X0 1 r1 ]
 [f ]
 "84
 [; ;main.c: 84:  static unsigned int samples[32], i = 0, total = 0;
-[v F5938 `ui ~T0 @X0 -> 32 `i s samples ]
-[v F5939 `ui ~T0 @X0 1 s i ]
-[i F5939
+[v F5939 `ui ~T0 @X0 -> 32 `i s samples ]
+[v F5940 `ui ~T0 @X0 1 s i ]
+[i F5940
 -> -> 0 `i `ui
 ]
-[v F5940 `ui ~T0 @X0 1 s total ]
-[i F5940
+[v F5941 `ui ~T0 @X0 1 s total ]
+[i F5941
 -> -> 0 `i `ui
 ]
 "86
 [; ;main.c: 86:  total += x - samples[i];
-[e =+ F5940 - _x *U + &U F5938 * -> F5939 `ux -> -> # *U &U F5938 `ui `ux ]
+[e =+ F5941 - _x *U + &U F5939 * -> F5940 `ux -> -> # *U &U F5939 `ui `ux ]
 "87
 [; ;main.c: 87:  samples[i] = x;
-[e = *U + &U F5938 * -> F5939 `ux -> -> # *U &U F5938 `ui `ux _x ]
+[e = *U + &U F5939 * -> F5940 `ux -> -> # *U &U F5939 `ui `ux _x ]
 "89
 [; ;main.c: 89:  i = (i==(32 -1) ? 0 : i+1);
-[e = F5939 ? == F5939 -> - -> 32 `i -> 1 `i `ui : -> -> 0 `i `ui + F5939 -> -> 1 `i `ui ]
+[e = F5940 ? == F5940 -> - -> 32 `i -> 1 `i `ui : -> -> 0 `i `ui + F5940 -> -> 1 `i `ui ]
 "90
 [; ;main.c: 90:  return total/32;
-[e ) / F5940 -> -> 32 `i `ui ]
+[e ) / F5941 -> -> 32 `i `ui ]
 [e $UE 797  ]
 "91
 [; ;main.c: 91: }
 [e :UE 797 ]
 }
-[v F5942 `(ui ~T0 @X0 1 tf1`ui ]
+[v F5943 `(ui ~T0 @X0 1 tf1`ui ]
 "95
 [; ;main.c: 95: __attribute__((inline)) unsigned int low_pass_filter_2(unsigned int x1) {
-[v _low_pass_filter_2 `TF5942 ~T0 @X0 1 e ]
+[v _low_pass_filter_2 `TF5943 ~T0 @X0 1 e ]
 {
 [e :U _low_pass_filter_2 ]
 [v _x1 `ui ~T0 @X0 1 r1 ]
 [f ]
 "96
 [; ;main.c: 96:  static unsigned int samples1[32], i1 = 0, total1 = 0;
-[v F5944 `ui ~T0 @X0 -> 32 `i s samples1 ]
-[v F5945 `ui ~T0 @X0 1 s i1 ]
-[i F5945
+[v F5945 `ui ~T0 @X0 -> 32 `i s samples1 ]
+[v F5946 `ui ~T0 @X0 1 s i1 ]
+[i F5946
 -> -> 0 `i `ui
 ]
-[v F5946 `ui ~T0 @X0 1 s total1 ]
-[i F5946
+[v F5947 `ui ~T0 @X0 1 s total1 ]
+[i F5947
 -> -> 0 `i `ui
 ]
 "98
 [; ;main.c: 98:  total1 += x1 - samples1[i1];
-[e =+ F5946 - _x1 *U + &U F5944 * -> F5945 `ux -> -> # *U &U F5944 `ui `ux ]
+[e =+ F5947 - _x1 *U + &U F5945 * -> F5946 `ux -> -> # *U &U F5945 `ui `ux ]
 "99
 [; ;main.c: 99:  samples1[i1] = x1;
-[e = *U + &U F5944 * -> F5945 `ux -> -> # *U &U F5944 `ui `ux _x1 ]
+[e = *U + &U F5945 * -> F5946 `ux -> -> # *U &U F5945 `ui `ux _x1 ]
 "101
 [; ;main.c: 101:  i1 = (i1==(32 -1) ? 0 : i1+1);
-[e = F5945 ? == F5945 -> - -> 32 `i -> 1 `i `ui : -> -> 0 `i `ui + F5945 -> -> 1 `i `ui ]
+[e = F5946 ? == F5946 -> - -> 32 `i -> 1 `i `ui : -> -> 0 `i `ui + F5946 -> -> 1 `i `ui ]
 "102
 [; ;main.c: 102:  return total1/32;
-[e ) / F5946 -> -> 32 `i `ui ]
+[e ) / F5947 -> -> 32 `i `ui ]
 [e $UE 798  ]
 "103
 [; ;main.c: 103: }
@@ -1033,28 +1039,26 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 [e :U _main ]
 [f ]
-"115
-[; ;main.c: 115:     SYSTEM_Initialize();
+"116
+[; ;main.c: 116:     SYSTEM_Initialize();
 [e ( _SYSTEM_Initialize ..  ]
-"117
-[; ;main.c: 117:     (INTCONbits.GIE = 1);
-[e = . . _INTCONbits 0 3 -> -> 1 `i `uc ]
 "118
-[; ;main.c: 118:     (INTCONbits.PEIE = 1);
-[e = . . _INTCONbits 0 2 -> -> 1 `i `uc ]
+[; ;main.c: 118:     (INTCONbits.GIE = 1);
+[e = . . _INTCONbits 0 3 -> -> 1 `i `uc ]
 "119
-[; ;main.c: 119:     TMR0_StartTimer();
+[; ;main.c: 119:     (INTCONbits.PEIE = 1);
+[e = . . _INTCONbits 0 2 -> -> 1 `i `uc ]
+"120
+[; ;main.c: 120:     TMR0_StartTimer();
 [e ( _TMR0_StartTimer ..  ]
-"122
-[; ;main.c: 122:     int taster_time, slope_counter, tmp_zadato, slope_increment;
+"123
+[; ;main.c: 123:     int taster_time, slope_counter, tmp_zadato, slope_increment;
 [v _taster_time `i ~T0 @X0 1 a ]
 [v _slope_counter `i ~T0 @X0 1 a ]
 [v _tmp_zadato `i ~T0 @X0 1 a ]
 [v _slope_increment `i ~T0 @X0 1 a ]
-"123
-[; ;main.c: 123:     _Bool scr_out_enable = 0, slope_up_active;
-[v _scr_out_enable `a ~T0 @X0 1 a ]
-[e = _scr_out_enable -> -> 0 `i `a ]
+"124
+[; ;main.c: 124:     _Bool slope_up_active;
 [v _slope_up_active `a ~T0 @X0 1 a ]
 "126
 [; ;main.c: 126:     while (1)
@@ -1064,10 +1068,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "129
 [; ;main.c: 129:         slope_increment = low_pass_filter_2(ADC_GetConversion(pot_slope));
-[e = _slope_increment -> ( _low_pass_filter_2 (1 -> ( _ADC_GetConversion (1 . `E5909 0 `ui `i ]
+[e = _slope_increment -> ( _low_pass_filter_2 (1 -> ( _ADC_GetConversion (1 . `E5910 0 `ui `i ]
 "130
 [; ;main.c: 130:         tmp_zadato = 1000 - low_pass_filter_1(ADC_GetConversion(pot_power));
-[e = _tmp_zadato -> - -> -> 1000 `i `ui ( _low_pass_filter_1 (1 -> ( _ADC_GetConversion (1 . `E5909 1 `ui `i ]
+[e = _tmp_zadato -> - -> -> 1000 `i `ui ( _low_pass_filter_1 (1 -> ( _ADC_GetConversion (1 . `E5910 1 `ui `i ]
 "131
 [; ;main.c: 131:         if (tmp_zadato < 50) tmp_zadato = 50;
 [e $ ! < _tmp_zadato -> 50 `i 803  ]

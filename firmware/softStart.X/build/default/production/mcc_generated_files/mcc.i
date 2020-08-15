@@ -10053,6 +10053,8 @@ unsigned int zadat_ugao;
 
 unsigned int zadat_slope_adc;
 unsigned int zadat_slope;
+
+_Bool scr_out_enable = 0;
 # 57 "mcc_generated_files/mcc.h" 2
 
 # 1 "mcc_generated_files/adc.h" 1

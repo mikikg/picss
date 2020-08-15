@@ -10000,6 +10000,8 @@ unsigned int zadat_ugao;
 
 unsigned int zadat_slope_adc;
 unsigned int zadat_slope;
+
+_Bool scr_out_enable = 0;
 # 52 "mcc_generated_files/tmr0.c" 2
 
 

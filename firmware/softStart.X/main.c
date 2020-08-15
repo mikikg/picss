@@ -53,7 +53,7 @@ void TMR0_ISR(void) {
     //brojac3++;
     //brojac4++;
 
-    if ((brojac1 >= zadat_ugao) && (brojac1 <= (zadat_ugao+100))) {
+    if ((brojac1 >= zadat_ugao) && (brojac1 <= (zadat_ugao+100)) && scr_out_enable ) {
         NCO1CONbits.N1EN = true; //opcija za češalj
         //SCR_OUT=1; //opcija za puls
     } else {
@@ -111,6 +111,7 @@ inline unsigned int low_pass_filter_2(unsigned int x1) {
 #define min_angle 50 //za podesavanje
 
 void main(void) {
+        
     // initialize the device
     SYSTEM_Initialize();
     // When using interrupts, enable the Global and Peripheral Interrupts
@@ -120,9 +121,8 @@ void main(void) {
     
     //promenljive
     int taster_time, slope_counter, tmp_zadato, slope_increment;
-    bool scr_out_enable = false, slope_up_active;
+    bool slope_up_active;
 
-    
     while (1)
     {
         // ADC

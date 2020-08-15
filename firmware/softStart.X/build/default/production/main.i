@@ -10053,6 +10053,8 @@ unsigned int zadat_ugao;
 
 unsigned int zadat_slope_adc;
 unsigned int zadat_slope;
+
+_Bool scr_out_enable = 0;
 # 57 "./mcc_generated_files/mcc.h" 2
 
 # 1 "./mcc_generated_files/adc.h" 1
@@ -10122,7 +10124,7 @@ void TMR0_ISR(void) {
 
 
 
-    if ((brojac1 >= zadat_ugao) && (brojac1 <= (zadat_ugao+100))) {
+    if ((brojac1 >= zadat_ugao) && (brojac1 <= (zadat_ugao+100)) && scr_out_enable ) {
         NCO1CONbits.N1EN = 1;
 
     } else {
@@ -10173,6 +10175,7 @@ __attribute__((inline)) unsigned int low_pass_filter_2(unsigned int x1) {
 # 113 "main.c"
 void main(void) {
 
+
     SYSTEM_Initialize();
 
     (INTCONbits.GIE = 1);
@@ -10181,8 +10184,7 @@ void main(void) {
 
 
     int taster_time, slope_counter, tmp_zadato, slope_increment;
-    _Bool scr_out_enable = 0, slope_up_active;
-
+    _Bool slope_up_active;
 
     while (1)
     {

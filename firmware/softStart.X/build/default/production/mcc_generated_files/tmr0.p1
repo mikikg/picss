@@ -1,5 +1,5 @@
 Version 4.0 HI-TECH Software Intermediate Code
-[v F5888 `(v ~T0 @X0 0 tf ]
+[v F5889 `(v ~T0 @X0 0 tf ]
 "6788 /Applications/microchip/mplabx/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8/pic/include/proc/pic16f15313.h
 [; ;/Applications/microchip/mplabx/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8/pic/include/proc/pic16f15313.h: 6788: extern volatile unsigned char T0CON1 __attribute__((address(0x59F)));
 [v _T0CON1 `Vuc ~T0 @X0 0 e@1439 ]
@@ -56,8 +56,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 "6743
 [; ;/Applications/microchip/mplabx/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8/pic/include/proc/pic16f15313.h: 6743: extern volatile T0CON0bits_t T0CON0bits __attribute__((address(0x59E)));
 [v _T0CON0bits `VS329 ~T0 @X0 0 e@1438 ]
-[v F5893 `(v ~T0 @X0 0 tf ]
-[v F5895 `(v ~T0 @X0 0 tf ]
+[v F5894 `(v ~T0 @X0 0 tf ]
+[v F5896 `(v ~T0 @X0 0 tf ]
 "110 /Applications/microchip/mplabx/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8/pic/include/proc/pic16f15313.h
 [; ;/Applications/microchip/mplabx/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8/pic/include/proc/pic16f15313.h: 110: __asm("INDF0 equ 00h");
 [; <" INDF0 equ 00h ;# ">
@@ -880,9 +880,15 @@ Version 4.0 HI-TECH Software Intermediate Code
 "363
 [; ;mcc_generated_files/tmr0.h: 363: unsigned int zadat_slope;
 [v _zadat_slope `ui ~T0 @X0 1 e ]
+"365
+[; ;mcc_generated_files/tmr0.h: 365: _Bool scr_out_enable = 0;
+[v _scr_out_enable `a ~T0 @X0 1 e ]
+[i _scr_out_enable
+-> -> 0 `i `a
+]
 "59 mcc_generated_files/tmr0.c
 [; ;mcc_generated_files/tmr0.c: 59: void (*TMR0_InterruptHandler)(void);
-[v _TMR0_InterruptHandler `*F5888 ~T0 @X0 1 e ]
+[v _TMR0_InterruptHandler `*F5889 ~T0 @X0 1 e ]
 "61
 [; ;mcc_generated_files/tmr0.c: 61: void TMR0_Initialize(void)
 [v _TMR0_Initialize `(v ~T0 @X0 1 ef ]
@@ -933,10 +939,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 "123
 [; ;mcc_generated_files/tmr0.c: 123: void TMR0_SetInterruptHandler(void (* InterruptHandler)(void)){
-[v _TMR0_SetInterruptHandler `(v ~T0 @X0 1 ef1`*F5893 ]
+[v _TMR0_SetInterruptHandler `(v ~T0 @X0 1 ef1`*F5894 ]
 {
 [e :U _TMR0_SetInterruptHandler ]
-[v _InterruptHandler `*F5895 ~T0 @X0 1 r1 ]
+[v _InterruptHandler `*F5896 ~T0 @X0 1 r1 ]
 [f ]
 "124
 [; ;mcc_generated_files/tmr0.c: 124:     TMR0_InterruptHandler = InterruptHandler;

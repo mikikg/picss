@@ -362,6 +362,7 @@ unsigned int zadat_ugao;
 unsigned int zadat_slope_adc;
 unsigned int zadat_slope;
 
+bool scr_out_enable = false;
 
 #define SCR_OUT RA4
 #define RLY_OUT RA5

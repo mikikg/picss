@@ -884,6 +884,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 "363
 [; ;mcc_generated_files/tmr0.h: 363: unsigned int zadat_slope;
 [v _zadat_slope `ui ~T0 @X0 1 e ]
+"365
+[; ;mcc_generated_files/tmr0.h: 365: _Bool scr_out_enable = 0;
+[v _scr_out_enable `a ~T0 @X0 1 e ]
+[i _scr_out_enable
+-> -> 0 `i `a
+]
 [v $root$_INTERRUPT_InterruptManager `(v ~T0 @X0 0 e ]
 "52 mcc_generated_files/interrupt_manager.c
 [; ;mcc_generated_files/interrupt_manager.c: 52: void __attribute__((picinterrupt(("")))) INTERRUPT_InterruptManager (void)
