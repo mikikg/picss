@@ -33,8 +33,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;/Applications/microchip/mplabx/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8/pic/include/proc/pic16f15313.h: 7720: extern volatile PIR2bits_t PIR2bits __attribute__((address(0x70E)));
 [v _PIR2bits `VS375 ~T0 @X0 0 e@1806 ]
 [p mainexit ]
-"74 ./mcc_generated_files/mcc.h
-[; ;./mcc_generated_files/mcc.h: 74: void SYSTEM_Initialize(void);
+"75 ./mcc_generated_files/mcc.h
+[; ;./mcc_generated_files/mcc.h: 75: void SYSTEM_Initialize(void);
 [v _SYSTEM_Initialize `(v ~T0 @X0 0 ef ]
 "419 /Applications/microchip/mplabx/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8/pic/include/proc/pic16f15313.h
 [; ;/Applications/microchip/mplabx/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8/pic/include/proc/pic16f15313.h: 419:     struct {
@@ -52,11 +52,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _TMR0_StartTimer `(v ~T0 @X0 0 ef ]
 "129 main.c
 [; ;main.c: 129:         slope_increment = low_pass_filter_2(ADC_GetConversion(pot_slope));
-[c E5910 0 1 59 60 61 62 63 .. ]
-[n E5910 . pot_slope pot_power channel_AVSS channel_Temp channel_DAC1 channel_FVR_BUF1 channel_FVR_BUF2  ]
+[c E5921 0 1 59 60 61 62 63 .. ]
+[n E5921 . pot_slope pot_power channel_AVSS channel_Temp channel_DAC1 channel_FVR_BUF1 channel_FVR_BUF2  ]
 "291 ./mcc_generated_files/adc.h
 [; ;./mcc_generated_files/adc.h: 291: adc_result_t ADC_GetConversion(adc_channel_t channel);
-[v _ADC_GetConversion `(us ~T0 @X0 0 ef1`E5910 ]
+[v _ADC_GetConversion `(us ~T0 @X0 0 ef1`E5921 ]
 "19701 /Applications/microchip/mplabx/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8/pic/include/proc/pic16f15313.h
 [; ;/Applications/microchip/mplabx/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8/pic/include/proc/pic16f15313.h: 19701: extern volatile __bit RA3 __attribute__((address(0x63)));
 [v _RA3 `Vb ~T0 @X0 0 e@99 ]
@@ -907,8 +907,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 52:     brojac2++;
 [e ++ _brojac2 -> -> 1 `i `ui ]
 "56
-[; ;main.c: 56:     if ((brojac1 >= zadat_ugao) && (brojac1 <= (zadat_ugao+100)) && scr_out_enable ) {
-[e $ ! && && >= _brojac1 _zadat_ugao <= _brojac1 + _zadat_ugao -> -> 100 `i `ui != -> _scr_out_enable `i -> 0 `i 793  ]
+[; ;main.c: 56:     if ((brojac1 >= zadat_ugao) && (brojac1 <= (zadat_ugao+200)) && scr_out_enable ) {
+[e $ ! && && >= _brojac1 _zadat_ugao <= _brojac1 + _zadat_ugao -> -> 200 `i `ui != -> _scr_out_enable `i -> 0 `i 793  ]
 {
 "57
 [; ;main.c: 57:         NCO1CONbits.N1EN = 1;
@@ -960,73 +960,73 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 79: }
 [e :UE 795 ]
 }
-[v F5937 `(ui ~T0 @X0 1 tf1`ui ]
+[v F5948 `(ui ~T0 @X0 1 tf1`ui ]
 "83
 [; ;main.c: 83: __attribute__((inline)) unsigned int low_pass_filter_1(unsigned int x) {
-[v _low_pass_filter_1 `TF5937 ~T0 @X0 1 e ]
+[v _low_pass_filter_1 `TF5948 ~T0 @X0 1 e ]
 {
 [e :U _low_pass_filter_1 ]
 [v _x `ui ~T0 @X0 1 r1 ]
 [f ]
 "84
 [; ;main.c: 84:  static unsigned int samples[32], i = 0, total = 0;
-[v F5939 `ui ~T0 @X0 -> 32 `i s samples ]
-[v F5940 `ui ~T0 @X0 1 s i ]
-[i F5940
+[v F5950 `ui ~T0 @X0 -> 32 `i s samples ]
+[v F5951 `ui ~T0 @X0 1 s i ]
+[i F5951
 -> -> 0 `i `ui
 ]
-[v F5941 `ui ~T0 @X0 1 s total ]
-[i F5941
+[v F5952 `ui ~T0 @X0 1 s total ]
+[i F5952
 -> -> 0 `i `ui
 ]
 "86
 [; ;main.c: 86:  total += x - samples[i];
-[e =+ F5941 - _x *U + &U F5939 * -> F5940 `ux -> -> # *U &U F5939 `ui `ux ]
+[e =+ F5952 - _x *U + &U F5950 * -> F5951 `ux -> -> # *U &U F5950 `ui `ux ]
 "87
 [; ;main.c: 87:  samples[i] = x;
-[e = *U + &U F5939 * -> F5940 `ux -> -> # *U &U F5939 `ui `ux _x ]
+[e = *U + &U F5950 * -> F5951 `ux -> -> # *U &U F5950 `ui `ux _x ]
 "89
 [; ;main.c: 89:  i = (i==(32 -1) ? 0 : i+1);
-[e = F5940 ? == F5940 -> - -> 32 `i -> 1 `i `ui : -> -> 0 `i `ui + F5940 -> -> 1 `i `ui ]
+[e = F5951 ? == F5951 -> - -> 32 `i -> 1 `i `ui : -> -> 0 `i `ui + F5951 -> -> 1 `i `ui ]
 "90
 [; ;main.c: 90:  return total/32;
-[e ) / F5941 -> -> 32 `i `ui ]
+[e ) / F5952 -> -> 32 `i `ui ]
 [e $UE 797  ]
 "91
 [; ;main.c: 91: }
 [e :UE 797 ]
 }
-[v F5943 `(ui ~T0 @X0 1 tf1`ui ]
+[v F5954 `(ui ~T0 @X0 1 tf1`ui ]
 "95
 [; ;main.c: 95: __attribute__((inline)) unsigned int low_pass_filter_2(unsigned int x1) {
-[v _low_pass_filter_2 `TF5943 ~T0 @X0 1 e ]
+[v _low_pass_filter_2 `TF5954 ~T0 @X0 1 e ]
 {
 [e :U _low_pass_filter_2 ]
 [v _x1 `ui ~T0 @X0 1 r1 ]
 [f ]
 "96
 [; ;main.c: 96:  static unsigned int samples1[32], i1 = 0, total1 = 0;
-[v F5945 `ui ~T0 @X0 -> 32 `i s samples1 ]
-[v F5946 `ui ~T0 @X0 1 s i1 ]
-[i F5946
+[v F5956 `ui ~T0 @X0 -> 32 `i s samples1 ]
+[v F5957 `ui ~T0 @X0 1 s i1 ]
+[i F5957
 -> -> 0 `i `ui
 ]
-[v F5947 `ui ~T0 @X0 1 s total1 ]
-[i F5947
+[v F5958 `ui ~T0 @X0 1 s total1 ]
+[i F5958
 -> -> 0 `i `ui
 ]
 "98
 [; ;main.c: 98:  total1 += x1 - samples1[i1];
-[e =+ F5947 - _x1 *U + &U F5945 * -> F5946 `ux -> -> # *U &U F5945 `ui `ux ]
+[e =+ F5958 - _x1 *U + &U F5956 * -> F5957 `ux -> -> # *U &U F5956 `ui `ux ]
 "99
 [; ;main.c: 99:  samples1[i1] = x1;
-[e = *U + &U F5945 * -> F5946 `ux -> -> # *U &U F5945 `ui `ux _x1 ]
+[e = *U + &U F5956 * -> F5957 `ux -> -> # *U &U F5956 `ui `ux _x1 ]
 "101
 [; ;main.c: 101:  i1 = (i1==(32 -1) ? 0 : i1+1);
-[e = F5946 ? == F5946 -> - -> 32 `i -> 1 `i `ui : -> -> 0 `i `ui + F5946 -> -> 1 `i `ui ]
+[e = F5957 ? == F5957 -> - -> 32 `i -> 1 `i `ui : -> -> 0 `i `ui + F5957 -> -> 1 `i `ui ]
 "102
 [; ;main.c: 102:  return total1/32;
-[e ) / F5947 -> -> 32 `i `ui ]
+[e ) / F5958 -> -> 32 `i `ui ]
 [e $UE 798  ]
 "103
 [; ;main.c: 103: }
@@ -1068,10 +1068,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 "129
 [; ;main.c: 129:         slope_increment = low_pass_filter_2(ADC_GetConversion(pot_slope));
-[e = _slope_increment -> ( _low_pass_filter_2 (1 -> ( _ADC_GetConversion (1 . `E5910 0 `ui `i ]
+[e = _slope_increment -> ( _low_pass_filter_2 (1 -> ( _ADC_GetConversion (1 . `E5921 0 `ui `i ]
 "130
 [; ;main.c: 130:         tmp_zadato = 1000 - low_pass_filter_1(ADC_GetConversion(pot_power));
-[e = _tmp_zadato -> - -> -> 1000 `i `ui ( _low_pass_filter_1 (1 -> ( _ADC_GetConversion (1 . `E5910 1 `ui `i ]
+[e = _tmp_zadato -> - -> -> 1000 `i `ui ( _low_pass_filter_1 (1 -> ( _ADC_GetConversion (1 . `E5921 1 `ui `i ]
 "131
 [; ;main.c: 131:         if (tmp_zadato < 50) tmp_zadato = 50;
 [e $ ! < _tmp_zadato -> 50 `i 803  ]
@@ -1211,14 +1211,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 }
 [e :U 815 ]
 "178
-[; ;main.c: 178:             if (zadat_ugao_adc < 60) RA5 = 0;
+[; ;main.c: 178:             if (zadat_ugao_adc < 60) RA5 = 1;
 [e $ ! < _zadat_ugao_adc -> -> 60 `i `ui 818  ]
-[e = _RA5 -> -> 0 `i `b ]
+[e = _RA5 -> -> 1 `i `b ]
 [e :U 818 ]
 "179
-[; ;main.c: 179:             if (zadat_ugao_adc > 80) RA5 = 1;
+[; ;main.c: 179:             if (zadat_ugao_adc > 80) RA5 = 0;
 [e $ ! > _zadat_ugao_adc -> -> 80 `i `ui 819  ]
-[e = _RA5 -> -> 1 `i `b ]
+[e = _RA5 -> -> 0 `i `b ]
 [e :U 819 ]
 "180
 [; ;main.c: 180:         } else {
@@ -1233,8 +1233,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 183:             zadat_ugao_adc = 2000;
 [e = _zadat_ugao_adc -> -> 2000 `i `ui ]
 "184
-[; ;main.c: 184:             RA5 = 1;
-[e = _RA5 -> -> 1 `i `b ]
+[; ;main.c: 184:             RA5 = 0;
+[e = _RA5 -> -> 0 `i `b ]
 "185
 [; ;main.c: 185:         }
 }

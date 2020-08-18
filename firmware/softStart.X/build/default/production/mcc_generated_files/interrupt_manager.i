@@ -10023,6 +10023,17 @@ void NCO1_Initialize(void);
 _Bool NCO1_GetOutputStatus(void);
 # 56 "mcc_generated_files/mcc.h" 2
 
+# 1 "mcc_generated_files/memory.h" 1
+# 99 "mcc_generated_files/memory.h"
+uint16_t FLASH_ReadWord(uint16_t flashAddr);
+# 128 "mcc_generated_files/memory.h"
+void FLASH_WriteWord(uint16_t flashAddr, uint16_t *ramBuf, uint16_t word);
+# 164 "mcc_generated_files/memory.h"
+int8_t FLASH_WriteBlock(uint16_t writeAddr, uint16_t *flashWordArray);
+# 189 "mcc_generated_files/memory.h"
+void FLASH_EraseBlock(uint16_t startAddr);
+# 57 "mcc_generated_files/mcc.h" 2
+
 # 1 "mcc_generated_files/tmr0.h" 1
 # 100 "mcc_generated_files/tmr0.h"
 void TMR0_Initialize(void);
@@ -10056,7 +10067,7 @@ unsigned int zadat_slope_adc;
 unsigned int zadat_slope;
 
 _Bool scr_out_enable = 0;
-# 57 "mcc_generated_files/mcc.h" 2
+# 58 "mcc_generated_files/mcc.h" 2
 
 # 1 "mcc_generated_files/adc.h" 1
 # 72 "mcc_generated_files/adc.h"
@@ -10095,7 +10106,7 @@ adc_result_t ADC_GetConversionResult(void);
 adc_result_t ADC_GetConversion(adc_channel_t channel);
 # 319 "mcc_generated_files/adc.h"
 void ADC_TemperatureAcquisitionDelay(void);
-# 58 "mcc_generated_files/mcc.h" 2
+# 59 "mcc_generated_files/mcc.h" 2
 
 # 1 "mcc_generated_files/zcd.h" 1
 # 94 "mcc_generated_files/zcd.h"
@@ -10104,12 +10115,12 @@ void ZCD_Initialize(void);
 _Bool ZCD_IsLogicLevel(void);
 # 151 "mcc_generated_files/zcd.h"
 void ZCD_ISR(void);
-# 59 "mcc_generated_files/mcc.h" 2
-# 74 "mcc_generated_files/mcc.h"
+# 60 "mcc_generated_files/mcc.h" 2
+# 75 "mcc_generated_files/mcc.h"
 void SYSTEM_Initialize(void);
-# 87 "mcc_generated_files/mcc.h"
+# 88 "mcc_generated_files/mcc.h"
 void OSCILLATOR_Initialize(void);
-# 100 "mcc_generated_files/mcc.h"
+# 101 "mcc_generated_files/mcc.h"
 void PMD_Initialize(void);
 # 50 "mcc_generated_files/interrupt_manager.c" 2
 

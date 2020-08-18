@@ -53,7 +53,7 @@ void TMR0_ISR(void) {
     //brojac3++;
     //brojac4++;
 
-    if ((brojac1 >= zadat_ugao) && (brojac1 <= (zadat_ugao+100)) && scr_out_enable ) {
+    if ((brojac1 >= zadat_ugao) && (brojac1 <= (zadat_ugao+200)) && scr_out_enable ) {
         NCO1CONbits.N1EN = true; //opcija za češalj
         //SCR_OUT=1; //opcija za puls
     } else {
@@ -175,13 +175,13 @@ void main(void) {
                 }
             }
             //za relay kada je pri max snazi
-            if (zadat_ugao_adc < 60) RLY_OUT = 0;
-            if (zadat_ugao_adc > 80) RLY_OUT = 1;
+            if (zadat_ugao_adc < 60) RLY_OUT = 1;
+            if (zadat_ugao_adc > 80) RLY_OUT = 0;
         } else {
             //ugaseno
             slope_counter = 0;
             zadat_ugao_adc = inactive_angle;
-            RLY_OUT = 1;
+            RLY_OUT = 0;
         }
         
     }
